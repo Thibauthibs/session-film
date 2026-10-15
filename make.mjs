@@ -21,11 +21,12 @@ const name = story.name || path.basename(storyDir);
 const flag = (f) => args.indexOf(f);
 
 // 1. minutage + bande son (musique + bruitages, sans voix)
-const tl = buildTimeline(story);
+// une histoire peut fournir son propre minutage (film sur mesure) ; sinon il est calculé
+const tl = story.timing || buildTimeline(story);
 fs.writeFileSync(path.join(storyDir, "timing.json"), JSON.stringify(tl, null, 1));
 let hasAudio = true;
 try {
-  execFileSync("python3", [path.join(ROOT, "engine/audio/pub_audio.py"), path.join(storyDir, "timing.json"), "-", path.join(storyDir, "mix.wav")], { stdio: "inherit" });
+  execFileSync("python3", [path.join(ROOT, "engine/audio/pub_audio.py"), path.join(storyDir, "timing.json"), story.voice ? path.join(storyDir, story.voice) : "-", path.join(storyDir, "mix.wav")], { stdio: "inherit" });
 } catch {
   hasAudio = false;
   console.log("Bande son impossible (python3 + numpy + scipy + ffmpeg requis) : le film sera muet.");
@@ -47,7 +48,9 @@ const server = http.createServer((req, res) => {
   });
 });
 await new Promise((r) => server.listen(args.includes("--preview") ? 8899 : 0, "127.0.0.1", r));
-const base = `http://127.0.0.1:${server.address().port}/engine/index.html?story=/story/${path.basename(storyPath)}`;
+// une histoire peut aussi fournir sa propre page (film sur mesure), servie depuis son dossier
+const pagePath = story.page ? `/story/${story.page}` : "/engine/index.html";
+const base = `http://127.0.0.1:${server.address().port}${pagePath}?story=/story/${path.basename(storyPath)}`;
 
 if (args.includes("--preview")) {
   console.log(`Film en boucle : ${base}  (clic = son ; ctrl+C pour arrêter)`);
@@ -69,8 +72,9 @@ if (args.includes("--preview")) {
   const clip = { x: 0, y: 0, width: 1080, height: 1920 };
 
   if (flag("--stills") >= 0) {
-    const S = tl.scenes, C = tl.cues, list = args[flag("--stills") + 1] && !args[flag("--stills") + 1].startsWith("--")
-      ? args[flag("--stills") + 1].split(",").map(Number)
+    const S = tl.scenes, C = tl.cues || {}, given = args[flag("--stills") + 1] && !args[flag("--stills") + 1].startsWith("--");
+    const list = given ? args[flag("--stills") + 1].split(",").map(Number)
+      : story.timing ? [0.12, 0.27, 0.45, 0.6, 0.72, 0.9].map((k) => +(k * tl.total).toFixed(1))
       : [C.intro[1] + 0.4, S.before != null ? S.before + 2.6 : null, C.steps[Math.min(2, C.steps.length - 1)] + 0.6, C.validated + 0.3, S.results != null ? (C.cards?.[0] ?? S.results + 2) + 1.2 : null, S.end + 2.4].filter((x) => x != null);
     fs.mkdirSync(path.join(storyDir, "stills"), { recursive: true });
     for (const t of list) {

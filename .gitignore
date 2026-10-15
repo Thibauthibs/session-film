@@ -7,6 +7,7 @@ legacy/
 stories/*
 !stories/memoire/
 !stories/memory-cleanup/
+!stories/memoire-v2/
 
 # fichiers produits à chaque rendu
 stories/*/stills/
@@ -14,3 +15,5 @@ stories/*/timing.json
 stories/*/mix.wav
 stories/*/mix_brut.wav
 stories/*/*.mp4
+stories/*/voix.wav
+stories/*/voix.json

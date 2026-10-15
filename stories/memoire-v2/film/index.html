@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>La mémoire de mon agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Public+Sans:wght@500;600;700;800&display=block" rel="stylesheet" />
+  <style>
+    :root { --paper: #1e0806; --ink: #fbeee6; --muted: rgba(251,238,230,.6); --accent: #ff7a45; --accent2: #ffb066; --green: #3ddc84; }
+    html, body { margin: 0; height: 100%; background: #0b0302; overflow: hidden; }
+    #stage { position: absolute; left: 50%; top: 50%; width: 1080px; height: 1920px; background: var(--paper); overflow: hidden; font-family: 'Public Sans', system-ui, sans-serif; }
+    #stage canvas { position: absolute; inset: 0; width: 1080px; height: 1920px; display: block; }
+    #vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 80% at 50% 45%, transparent 55%, rgba(0,0,0,.38) 100%); }
+    #ui { position: absolute; inset: 0; pointer-events: none; color: var(--ink); }
+    .a { position: absolute; opacity: 0; will-change: transform, opacity; }
+    .num { font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -0.04em; line-height: .9; }
+    .lab { font-weight: 600; font-size: 34px; color: var(--muted); letter-spacing: -0.01em; }
+    .mono { font-family: 'JetBrains Mono', monospace; font-weight: 500; white-space: nowrap; }
+    #caption { left: 80px; right: 80px; top: 1520px; text-align: center; font-weight: 600; font-size: 44px; line-height: 1.5; letter-spacing: -0.015em; }
+    #caption span { background: rgba(22,7,4,.9); padding: 5px 16px; border-radius: 10px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+    .sq { display: inline-block; width: 22px; height: 22px; border-radius: 5px; background: var(--accent); margin-right: 16px; vertical-align: -2px; }
+  </style>
+  <script type="importmap">
+    { "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }
+  </script>
+</head>
+<body>
+  <div id="stage">
+    <div id="vignette"></div>
+    <div id="ui">
+      <div id="countBlock" class="a" style="left:90px;top:190px">
+        <div id="countNum" class="num" style="font-size:190px">87</div>
+        <div id="countLab" class="lab" style="margin-top:14px">lignes relues à chaque session</div>
+        <div id="deadLab" class="lab" style="margin-top:12px;color:var(--ink);opacity:0"><span class="sq"></span>dont 23 projets morts</div>
+        <div id="kbLab" class="lab" style="margin-top:12px;opacity:0">Poids de l'index : 17,6 → 13,7 Ko</div>
+      </div>
+      <div id="agentLab" class="a mono" style="font-size:24px;color:var(--accent2)">claude code</div>
+      <div id="trayLab" class="a mono" style="font-size:26px;color:var(--muted)">archive/</div>
+      <div id="lostLab" class="a" style="font-weight:600;font-size:28px;color:var(--ink);white-space:nowrap">23 fiches rangées, aucune supprimée</div>
+      <div id="linksLab" class="a" style="font-weight:600;font-size:30px;color:var(--green);white-space:nowrap">62 liens vérifiés</div>
+      <div id="endTitle" class="a" style="left:90px;right:90px;top:200px;font-weight:700;font-size:80px;line-height:1.04;letter-spacing:-0.035em">Une IA qui retient<br>ce qui compte.</div>
+      <div id="name" class="a" style="left:90px;top:410px;display:flex;align-items:center;gap:20px">
+        <span style="width:48px;height:4px;background:var(--accent)"></span>
+        <span style="font-weight:800;font-size:44px;letter-spacing:-0.02em">thibaut lanoé</span>
+      </div>
+      <div id="credit" class="a" style="left:0;right:0;top:1560px;text-align:center;font-weight:600;font-size:28px;color:var(--muted)">Film rendu avec session-film, mon outil open source</div>
+      <div id="caption" class="a"></div>
+    </div>
+  </div>
+  <script type="module" src="./film.js"></script>
+</body>
+</html>

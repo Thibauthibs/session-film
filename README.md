@@ -64,6 +64,16 @@ A story is one `story.json` file. Start from `stories/memory-cleanup` (English) 
 
 Wrap accent words in `*stars*` and split a hook sentence over two lines with `|`. Long titles shrink to fit on their own.
 
+## Custom scenes and voice-over
+
+A story can also bring its own scene and voice. `stories/memoire-v2` is a hand-made film in French: the agent's memory is a page of 87 lines, the 23 dead entries slide into an archive tray and the stack closes up to 65 lines, in one continuous camera move, narrated with an ElevenLabs voice and captioned for muted autoplay ([watch it](docs/demo-voice-fr.mp4)). Three optional fields make it work:
+
+| Field | What it does |
+| --- | --- |
+| `page` | Path to your own HTML scene in the story folder, which exposes `window.renderAt(t)` like the engine |
+| `voice` | Voice-over file; the soundtrack ducks the music under it |
+| `timing` | Your own timeline (total, scenes, sound effects) instead of the computed one |
+
 ## From Claude Code
 
 Copy `skill/SKILL.md` to `~/.claude/skills/session-film/SKILL.md`. At the end of a session, ask Claude to "make a film of this session". It gathers what was actually done, writes the story, checks the key frames and renders the film.
