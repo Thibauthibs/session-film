@@ -4,7 +4,7 @@
   "description": "Turn a Claude Code session into a 30-second vertical 3D film: real steps, real tools, real before/after numbers.",
   "type": "module",
   "license": "MIT",
-  "author": "Thibaut Lanoé",
+  "author": "Thibaut Lanoë",
   "repository": "github:Thibauthibs/session-film",
   "scripts": {
     "film": "node make.mjs"
