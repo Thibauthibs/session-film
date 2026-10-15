@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Film de session</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,600&family=JetBrains+Mono:wght@500;700&family=Public+Sans:wght@600;700;800&display=block" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #1e0806; --ink: #fbeee6; --muted: rgba(251,238,230,.62); --faint: rgba(251,238,230,.12);
+      --accent: #ff7a45; --accent2: #ffb066; --card: rgba(38,14,10,.92); --green: #0cce6b; --orange: #ffa400;
+    }
+    html, body { margin: 0; height: 100%; background: #0b0302; overflow: hidden; }
+    #stage { position: absolute; left: 50%; top: 50%; width: 1080px; height: 1920px; background: var(--paper); overflow: hidden; }
+    #stage canvas { position: absolute; inset: 0; width: 1080px; height: 1920px; display: block; }
+    #ui { position: absolute; inset: 0; pointer-events: none; color: var(--ink); }
+    .serif { font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.03em; line-height: 1.04; }
+    .acc { color: var(--accent); font-style: italic; }
+    .w { display: inline-block; margin-right: .24em; }
+    .abs { position: absolute; opacity: 0; }
+    .title { left: 90px; right: 90px; }
+    .title > div { white-space: nowrap; }
+    .label { font-family: 'Public Sans', sans-serif; font-weight: 700; font-size: 30px; color: var(--muted); letter-spacing: -0.01em; }
+    .card { background: var(--card); border: 1px solid var(--faint); border-radius: 28px; padding: 30px 36px; box-sizing: border-box;
+            box-shadow: 0 40px 100px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06); }
+    .num { font-family: 'Fraunces', serif; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.02; letter-spacing: -0.02em; white-space: nowrap; }
+    .tool { font-family: 'Public Sans', sans-serif; font-weight: 800; font-size: 32px; color: var(--ink); white-space: nowrap; text-align: center; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .check { width: 40px; height: 40px; border-radius: 20px; background: var(--green); display: flex; align-items: center; justify-content: center; flex: none; }
+    .strike { font-family: 'Fraunces', serif; font-weight: 500; font-size: 42px; color: var(--muted); text-decoration: line-through; text-decoration-thickness: 3px; white-space: nowrap; }
+    #hint { position: fixed; left: 16px; bottom: 14px; font: 600 13px system-ui, sans-serif; color: rgba(255,255,255,.45); }
+  </style>
+  <script type="importmap">
+    { "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }
+  </script>
+</head>
+<body>
+  <div id="stage"><div id="ui"></div></div>
+  <script type="module" src="./film.js"></script>
+</body>
+</html>

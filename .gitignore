@@ -1,0 +1,16 @@
+node_modules/
+__pycache__/
+.DS_Store
+legacy/
+
+# seules les histoires d'exemple sont publiées
+stories/*
+!stories/memoire/
+!stories/memory-cleanup/
+
+# fichiers produits à chaque rendu
+stories/*/stills/
+stories/*/timing.json
+stories/*/mix.wav
+stories/*/mix_brut.wav
+stories/*/*.mp4

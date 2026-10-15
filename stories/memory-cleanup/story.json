@@ -1,0 +1,40 @@
+{
+  "name": "memory-cleanup",
+  "locale": "en-US",
+  "hook": ["My AI agent|re-read everything.", "Even the *dead* *stuff.*", "So we *cleaned* *up.*"],
+  "before": {
+    "title": ["Its memory:", "an index re-read", "every *session.*"],
+    "card": { "value": "87 lines", "label": "including 23 dead or closed projects" }
+  },
+  "agent": {
+    "title": ["I asked the agent", "to tidy up", "its own *memory.*"],
+    "agentName": "claude code",
+    "context": "claude code · memory",
+    "tools": [
+      { "id": "mem", "name": "Memory" },
+      { "id": "fork", "name": "Sub-agent" },
+      { "id": "script", "name": "Check script" }
+    ],
+    "steps": [
+      { "tool": "fork", "text": "23 entries read one by one" },
+      { "tool": "mem", "text": "Archived, nothing deleted" },
+      { "tool": "mem", "text": "Index rewritten as one line" },
+      { "tool": "script", "text": "62 links verified" },
+      { "tool": "script", "text": "61 remaining entries checked" }
+    ],
+    "validated": "Nothing erased, everything findable."
+  },
+  "results": {
+    "title": "*Result.*",
+    "subtitle": "Measured on the index file, before and after.",
+    "cards": [
+      { "label": "Lines re-read every session", "before": "87", "from": 87, "to": 65, "decimals": 0, "unit": "" },
+      { "label": "Index size", "before": "17.6 KB", "from": 17.6, "to": 13.7, "decimals": 1, "unit": " KB" }
+    ],
+    "footnote": "Cleanup of October 14, 2026"
+  },
+  "end": {
+    "title": ["An AI that keeps", "what *matters.*"],
+    "name": "thibaut lanoé"
+  }
+}

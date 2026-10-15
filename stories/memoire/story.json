@@ -1,0 +1,39 @@
+{
+  "name": "memoire",
+  "hook": ["Mon agent IA|relisait tout.", "Même ce qui était *mort.*", "On a fait le *ménage.*"],
+  "before": {
+    "title": ["Sa mémoire :", "un index relu", "à chaque *session.*"],
+    "card": { "value": "87 lignes", "label": "dont 23 projets abandonnés ou clos" }
+  },
+  "agent": {
+    "title": ["J'ai demandé", "à l'agent de ranger", "sa propre *mémoire.*"],
+    "agentName": "claude code",
+    "context": "claude code · mémoire",
+    "tools": [
+      { "id": "mem", "name": "Mémoire" },
+      { "id": "fork", "name": "Agent secondaire" },
+      { "id": "script", "name": "Script de contrôle" }
+    ],
+    "steps": [
+      { "tool": "fork", "text": "23 fiches lues une par une" },
+      { "tool": "mem", "text": "Archivées, aucune supprimée" },
+      { "tool": "mem", "text": "Index réécrit en une ligne" },
+      { "tool": "script", "text": "62 liens vérifiés" },
+      { "tool": "script", "text": "61 fiches restantes contrôlées" }
+    ],
+    "validated": "Rien n'est effacé, tout se retrouve."
+  },
+  "results": {
+    "title": "*Résultat.*",
+    "subtitle": "Mesuré sur le fichier d'index, avant et après.",
+    "cards": [
+      { "label": "Lignes relues à chaque session", "before": "87", "from": 87, "to": 65, "decimals": 0, "unit": "" },
+      { "label": "Poids de l'index", "before": "17,6 Ko", "from": 17.6, "to": 13.7, "decimals": 1, "unit": " Ko" }
+    ],
+    "footnote": "Ménage du 14 octobre 2026"
+  },
+  "end": {
+    "title": ["Une IA qui retient", "ce qui *compte.*"],
+    "name": "thibaut lanoé"
+  }
+}
